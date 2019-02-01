@@ -5,8 +5,8 @@
 </template>
 
 <script>
-  import '../static/kindeditor/kindeditor-all-min.js'
-  import '../static/kindeditor/themes/default/default.css'
+  import './static/kindeditor/kindeditor-all-min.js'
+  import './static/kindeditor/themes/default/default.css'
   export default {
     name: 'kindEditor',
     data() {
