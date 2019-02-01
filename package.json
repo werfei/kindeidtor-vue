@@ -1,9 +1,10 @@
 {
   "name": "kindeditor-vuejs",
   "description": "a kind editor vue project",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": "werfei",
   "license": "MIT",
+  "main": "src/plugin/index.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
