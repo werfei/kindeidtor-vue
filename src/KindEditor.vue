@@ -7,12 +7,14 @@
 <script>
   import './static/kindeditor/kindeditor-all-min.js'
   import './static/kindeditor/themes/default/default.css'
+
   export default {
     name: 'kindEditor',
     data() {
       return {
         editor: null,
-        outContent: this.content
+        outContent: this.content,
+        outReadonly: this.readonly
       }
     },
     props: {
@@ -278,11 +280,25 @@
       },
       tabIndex: {
         type: Number
+      },
+      readonly: {
+        type: Boolean,
+        default: false
       }
     },
     watch: {
       content(val) {
         this.editor && val !== this.outContent && this.editor.html(val)
+      },
+      readonly(val) {
+        if (this.editor && val !== this.outReadonly) {
+          this.editor.readonly(val)
+          this.outReadonly = val
+        }
+
+      },
+      outReadonly(val) {
+        this.$emit('update:readonly', val)
       },
       outContent(val) {
         this.$emit('update:content', val)
@@ -376,6 +392,7 @@
           fixToolBar: _this.fixToolBar,
           tabIndex: _this.tabIndex
         })
+        _this.editor.readonly(_this.outReadonly)
       }
     }
   }

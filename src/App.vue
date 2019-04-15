@@ -1,7 +1,8 @@
 <template>
   <div id="app">
-    <kind-editor id="aaaaaa">
+    <kind-editor id="aaaaaa" :readonly="readonly">
     </kind-editor>
+    <button @click="readonly=!readonly">aaaaaa</button>
   </div>
 </template>
 
@@ -11,7 +12,8 @@
     name: 'app',
     data() {
       return {
-        msg: 'Welcome to Your Vue.js App'
+        msg: 'Welcome to Your Vue.js App',
+        readonly: false
       }
     }
   }

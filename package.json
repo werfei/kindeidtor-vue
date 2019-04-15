@@ -1,7 +1,7 @@
 {
   "name": "kindeditor-vuejs",
   "description": "a kind editor vue project",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "author": "werfei",
   "license": "MIT",
   "main": "src/index.js",
