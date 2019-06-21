@@ -362,7 +362,9 @@
           cssData: _this.cssData,
           bodyClass: _this.bodyClass,
           colorTable: _this.colorTable,
-          afterCreate: _this.afterCreate,
+          afterCreate: function () {
+            _this.afterCreate();
+          },
           afterChange: function () {
             _this.outContent = this.html()
           },
