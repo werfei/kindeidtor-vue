@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <kind-editor id="aaaaaa" :readonly="readonly">
+    <kind-editor id="aaaaaa" :readonly="readonly"        uploadJson="/api/common/editor-upload" >
     </kind-editor>
     <button @click="readonly=!readonly">aaaaaa</button>
   </div>

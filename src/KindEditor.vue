@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  import './static/kindeditor/kindeditor-all-min.js'
+  import './static/kindeditor/kindeditor-all.js'
   import './static/kindeditor/themes/default/default.css'
 
   export default {
@@ -362,9 +362,7 @@
           cssData: _this.cssData,
           bodyClass: _this.bodyClass,
           colorTable: _this.colorTable,
-          afterCreate: function () {
-            _this.afterCreate();
-          },
+          afterCreate: _this.afterCreate,
           afterChange: function () {
             _this.outContent = this.html()
           },
