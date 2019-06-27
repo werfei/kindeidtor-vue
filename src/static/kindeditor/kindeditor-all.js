@@ -5702,11 +5702,12 @@
     options.themesPath = _undef(options.themesPath, options.basePath + 'themes/');
     options.langPath = _undef(options.langPath, options.basePath + 'lang/');
     options.pluginsPath = _undef(options.pluginsPath, options.basePath + 'plugins/');
-    if (_undef(options.loadStyleMode, K.options.loadStyleMode)) {
-      var themeType = _undef(options.themeType, K.options.themeType);
-      _loadStyle(options.themesPath + 'default/default.css');
-      _loadStyle(options.themesPath + themeType + '/' + themeType + '.css');
-    }
+    // 去掉添加class
+    // if (_undef(options.loadStyleMode, K.options.loadStyleMode)) {
+    //   var themeType = _undef(options.themeType, K.options.themeType);
+    //   _loadStyle(options.themesPath + 'default/default.css');
+    //   _loadStyle(options.themesPath + themeType + '/' + themeType + '.css');
+    // }
 
     function create(editor) {
       _each(_plugins, function (name, fn) {
@@ -6595,6 +6596,9 @@ KindEditor.lang({
   },
   'lineheight.lineHeight': [
     {'1': '单倍行距'},
+    {'1.1': '1.1倍行距'},
+    {'1.2': '1.2倍行距'},
+    {'1.3': '1.3倍行距'},
     {'1.5': '1.5倍行距'},
     {'2': '2倍行距'},
     {'2.5': '2.5倍行距'},
