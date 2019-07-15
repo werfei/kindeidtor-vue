@@ -3,6 +3,27 @@
     <textarea :id="id" name="content" v-model="outContent"></textarea>
   </div>
 </template>
+<style type="text/css">
+
+.ke-icon-example2 {
+  background-image: url("./static/kindeditor/themes/default/abc.png");
+  background-size:45px 17px;
+  width: 45px;
+  height: 17px;
+}
+.ke-menu{
+  border: 1px solid #A0A0A0;
+  background-color: #F1F1F1;
+  color: #222222;
+  padding: 2px;
+  font-family: "sans serif",tahoma,verdana,helvetica;
+  font-size: 12px;
+  text-align: left;
+  overflow: hidden;
+  height: 200px;
+  overflow-y: scroll;
+}
+</style>
 
 <script>
   import './static/kindeditor/kindeditor-all.js'
@@ -18,6 +39,10 @@
       }
     },
     props: {
+      words:{
+        type: Array,
+        default: ''
+      },
       content: {
         type: String,
         default: ''
@@ -51,7 +76,7 @@
             'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
             'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image', 'multiimage',
             'flash', 'media', 'insertfile', 'table', 'hr', 'emoticons', 'baidumap', 'pagebreak',
-            'anchor', 'link', 'unlink', '|', 'about'
+            'anchor', 'link', 'unlink', '|', 'about','example2'
           ]
         }
       },
@@ -178,6 +203,9 @@
       },
       colorTable: {
         type: Array
+      },
+      insertHtml: {
+        type: Function
       },
       afterCreate: {
         type: Function
@@ -322,13 +350,44 @@
       this.removeEditor()
     },
     methods: {
+      ins(a){
+        window.KindEditor.insertHtml();
+      },
       removeEditor() {
         window.KindEditor.remove('#' + this.id)
       },
       initEditor() {
         var _this = this
         _this.removeEditor()
+
+        KindEditor.lang({
+          example2 : '选择后将在合同内容中加入占位符'
+        });
+        KindEditor.plugin('example2', function(K) {
+          var self = this, name = 'example2';
+          function click(value) {
+          }
+          self.clickToolbar(name, function() {
+            var menu = self.createMenu({
+              name : name,
+              width : 150
+            });
+            this.words
+            window.KindEditor.each(this.words, function(i, val) {
+              menu.addItem({
+                title : '<span style="font-size:' + val.label + ';">' + val.label + '</span>',
+                click : function() {
+                  self.insertHtml(val.value);
+                  menu.hide();
+                },
+                      // height : parseInt(val, 10) + 12,
+                      //checked : val === a
+              });
+            });
+          });
+        });
         _this.editor = window.KindEditor.create('#' + this.id, {
+          words:_this.words,
           width: _this.width,
           height: _this.height,
           minWidth: _this.minWidth,
@@ -362,6 +421,10 @@
           cssData: _this.cssData,
           bodyClass: _this.bodyClass,
           colorTable: _this.colorTable,
+          insertHtml: function (val) {
+            _this.insertHtml;
+            _this.insertHtml = this.html()
+          },
           afterCreate: _this.afterCreate,
           afterChange: function () {
             _this.outContent = this.html()
